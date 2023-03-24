@@ -35,9 +35,10 @@ class Hero(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    # relationship
+    # relationship: relate to the join table class name
     hero_powers = db.relationship('HeroPower', backref='hero')
-    # association
+    # association: reach through join table name and grab the attribute
+    # we want to associate this hero with (power)
     powers = association_proxy('hero_powers', 'power')
 
     def __repr__(self):
